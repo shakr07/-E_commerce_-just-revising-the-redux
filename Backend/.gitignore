@@ -1,0 +1,37 @@
+# Node modules
+node_modules/
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Environment variables
+.env
+
+# Build output
+dist/
+build/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDEs and editors
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# Optional: OS generated files
+*.swp
+*~
+
+# Optional: Coverage directory used by tools like istanbul
+coverage/
