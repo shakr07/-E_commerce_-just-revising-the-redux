@@ -5,6 +5,10 @@
             type: String, 
             required: true 
         },
+        Brand:{
+            type:String,
+            required:true
+        },
         category: { 
             type: String, 
             ref: 'Category' 
@@ -32,11 +36,8 @@
         quantitySold: { 
             type: Number, 
             min: 0
-        },
-        Brand:{
-            type:String,
-            required:true
         }
+        
     }, {
         timestamps: true 
         });

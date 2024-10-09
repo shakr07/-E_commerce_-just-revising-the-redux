@@ -41,10 +41,10 @@ export const navBarList = [
     link: "/journal",
   },
   {
-
     //this is only seen to the selllers
     id:1006,
-    title:"Add product"
+    title:"add-product",
+    link: "/add-product",
   }
 ];
 // =================== NavBarList End here ======================
