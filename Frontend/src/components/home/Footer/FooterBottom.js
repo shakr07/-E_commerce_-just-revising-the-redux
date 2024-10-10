@@ -9,11 +9,12 @@ const FooterBottom = () => {
           <span className="text-md mr-[1px] mt-[2px] md:mt-0 text-center hidden md:inline-flex">
             <AiOutlineCopyright />
           </span>
-          Copyright 2022 | Orebi shopping | All Rights Reserved |
-          <a href="https://reactbd.com/" target="_blank" rel="noreferrer">
+          Made by shashank and but Ecommerce template is copid from
+          <a href="https://orebishopping.reactbd.com/" target="_blank" rel="noreferrer">
             <span className="ml-1 font-medium group-hover:text-primeColor">
-              Powered by ReactBD.com
+             ReactBD.com 
             </span>
+           <strong> Special thank to <a href="https://github.com/noorjsdivs" target="_blank" rel="noreferrer"> Noor Mohammad </a> </strong>
           </a>
         </p>
       </div>

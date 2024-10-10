@@ -39,12 +39,6 @@ export const navBarList = [
     _id: 1005,
     title: "Journal",
     link: "/journal",
-  },
-  {
-    //this is only seen to the selllers
-    id:1006,
-    title:"add-product",
-    link: "/add-product",
   }
 ];
 // =================== NavBarList End here ======================

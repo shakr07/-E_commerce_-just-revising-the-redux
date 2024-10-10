@@ -4,17 +4,21 @@ import { MdClose } from "react-icons/md";
 import { HiMenuAlt2 } from "react-icons/hi";
 import { motion } from "framer-motion";
 import { logo, logoLight } from "../../../assets/images";
-import Image from "../../designLayouts/Image";
 import { navBarList } from "../../../constants";
 import Flex from "../../designLayouts/Flex";
-
+import Button from '@mui/material/Button';
+import { useNavigate } from "react-router-dom";
 const Header = () => {
   const [showMenu, setShowMenu] = useState(true);
   const [sidenav, setSidenav] = useState(false);
   const [category, setCategory] = useState(false);
   const [brand, setBrand] = useState(false);
   const location = useLocation();
-
+  const navigate = useNavigate();
+  const addproduct=()=>{
+    
+    navigate("/add-product"); 
+  }
   
   useEffect(() => {
     let ResponsiveMenu = () => {
@@ -27,17 +31,18 @@ const Header = () => {
     ResponsiveMenu();
     window.addEventListener("resize", ResponsiveMenu);
   }, []);
- 
+  const mystyle = {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  };
   return (
     <div className="w-full h-20 bg-white sticky top-0 z-50 border-b-[1px] border-b-gray-200">
       <nav className="h-full px-4 max-w-container mx-auto relative">
         <Flex className="flex items-center justify-between h-full">
-          <Link to="/">
-            <div>
-              <Image className="w-20 object-cover" imgSrc={logo} />
-            </div>
-          </Link>
-          <div>
+          <p>Shashank</p>
+                <div>
             {showMenu && (
               <motion.ul
                 initial={{ y: 30, opacity: 0 }}
@@ -56,10 +61,16 @@ const Header = () => {
                       <li>{title}</li>
                     </NavLink>
                   ))}
+                  <div style={mystyle}>
+                      <Button variant="contained" color="primary"
+                      onClick={addproduct}>
+                      Add Product
+                     </Button>
+                     </div>
                 </>
               </motion.ul>
             )}
-            
+             
             <HiMenuAlt2
               onClick={() => setSidenav(!sidenav)}
               className="inline-block md:hidden cursor-pointer w-8 h-6 absolute top-6 right-4"
@@ -125,6 +136,8 @@ const Header = () => {
                         Shop by Brand
                         <span className="text-lg">{brand ? "-" : "+"}</span>
                       </h1>
+                      
+
                       {brand && (
                         <motion.ul
                           initial={{ y: 15, opacity: 0 }}
@@ -148,6 +161,7 @@ const Header = () => {
                     <MdClose />
                   </span>
                 </motion.div>
+                
               </div>
             )}
             
