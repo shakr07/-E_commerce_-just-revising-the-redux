@@ -5,16 +5,16 @@
             type: String, 
             required: true 
         },
-        Brand:{
+        brand:{
             type:String,
             required:true
+        },
+        content: { 
+            type: String 
         },
         category: { 
             type: String, 
             ref: 'Category' 
-        },
-        extraDetails: { 
-            type: String 
         },
         price: { 
             type: Number, 

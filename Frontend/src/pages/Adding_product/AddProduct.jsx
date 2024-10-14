@@ -6,8 +6,10 @@ import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import { useNavigate } from 'react-router-dom';
 import JoditEditor from 'jodit-react';
+import axios from "axios";
+
 const AddProduct = (props) => {
-    const [name, setName] = useState('');
+    const [productName, setName] = useState('');
     const [brand, setBrand] = useState('');
     const [extraDetails, setExtraDetails] = useState('');
     const [price, setPrice] = useState('');
@@ -15,32 +17,51 @@ const AddProduct = (props) => {
     const [image, setImage] = useState('');
     const [color, setColor] = useState('');
     const [open, setOpen] = useState(false);
-    const [close,setClose]=useState(false);
-    const editor = useRef(null);
     const [content, setContent] = useState('');
+    const editor = useRef(null);
+    const Navigate = useNavigate();
+
     useEffect(() => {
         setOpen(props.hello); 
     }, [props.hello]); 
 
     const handleClose = () => setOpen(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Product Details:', { name, brand, extraDetails, price, category, image, color });
-
-        // Reset the form
-        setName('');
-        setBrand('');
-        setExtraDetails('');
-        setPrice('');
-        setCategory('');
-        setImage('');
-        setColor('');
-
-        // Close the modal after form submission
-        handleClose();
-    };
-
+    
+        // Log the values to ensure they're set correctly
+        console.log({ productName, brand, content, price, category, image, color });
+    
+        try {
+            await axios.post('http://localhost:8000/api/ecommerce/product_input', {
+                productName, 
+                brand,
+                content,
+                price: parseFloat(price),  // Ensure price is a number
+                category, 
+                image, 
+                color
+            });
+    
+            console.log('Product added successfully');
+    
+            // Reset the form
+            setName('');
+            setBrand('');
+            setExtraDetails('');
+            setContent('');
+            setPrice('');
+            setCategory('');
+            setImage('');
+            setColor('');
+    
+            // Close the modal after form submission
+            handleClose();
+        } catch (error) {
+            console.error('Error adding product:', error.response ? error.response.data : error.message);
+        }
+    };  
     const style = {
         position: 'absolute',
         top: '50%',
@@ -53,22 +74,13 @@ const AddProduct = (props) => {
         borderRadius: '10px',
         outline: 'none'
     };
-    const Navigate=useNavigate();
 
     return (
         <div>
             <Modal
                 open={open}
-                onClose={(event,reason)=>{
-                    // if(close==true){
-                    //    console.log("close is working")
-                    //     handleClose();
-                    //     setClose(false);
-                    //     Navigate("/")
-                         
-                    // }
+                onClose={(event, reason) => {
                     if (reason === "backdropClick" || reason === "escapeKeyDown") {
-                        
                         return;
                     }
                     handleClose();
@@ -85,7 +97,7 @@ const AddProduct = (props) => {
                                     fullWidth
                                     label="Product Name"
                                     variant="outlined"
-                                    value={name}
+                                    value={productName}
                                     onChange={(e) => setName(e.target.value)}
                                 />
                             </Grid>
@@ -99,11 +111,11 @@ const AddProduct = (props) => {
                                 />
                             </Grid>
                             <Grid item xs={12}>
-                            <JoditEditor
-            ref={editor}
-            value={content}
-            onChange={newContent => setContent(newContent)}
-        />
+                                <JoditEditor
+                                    ref={editor}
+                                    value={content}
+                                    onChange={newContent => setContent(newContent)}
+                                />
                             </Grid>
                             <Grid item xs={6}>
                                 <TextField
@@ -146,7 +158,7 @@ const AddProduct = (props) => {
                                 <Button variant="contained" color="primary" type="submit">
                                     Add Product
                                 </Button>
-                                <Button variant="contained" color="primary" type="submit" style={{ marginLeft: '50px' }} onClick={()=>Navigate("/")}>
+                                <Button variant="contained" color="primary" style={{ marginLeft: '50px' }} onClick={() => Navigate("/")}>
                                     Cancel
                                 </Button>
                             </Grid>
