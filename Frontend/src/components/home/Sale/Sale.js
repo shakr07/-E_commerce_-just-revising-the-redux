@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   saleImgOne,
@@ -7,7 +7,8 @@ import {
 } from "../../../assets/images/index";
 import Image from "../../designLayouts/Image";
 
-const Sale = () => {
+
+
   return (
     <div className="py-20 flex flex-col md:flex-row items-center justify-between gap-4 lg:gap-10">
       <div className="w-full md:w-2/3 lg:w-1/2 h-full">
@@ -30,6 +31,8 @@ const Sale = () => {
           </Link>
         </div>
       </div>
+      Debouce value is {debounedValue}
+      <input type="text" onChange={e=>setValue(e.target.value)}/>     
     </div>
   );
 };

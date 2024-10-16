@@ -50,7 +50,7 @@ const NewArrivals = () => {
     <div className="w-full pb-16">
       <Heading heading="New Arrivals" />
       <Slider {...settings}>
-        <div className="px-2">
+        {/* <div className="px-2">
           <Product
             _id="100001"
             img={newArrOne}
@@ -104,7 +104,7 @@ const NewArrivals = () => {
             badge={false}
             des="Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic excepturi quibusdam odio deleniti reprehenderit facilis."
           />
-        </div>
+        </div> */}
       </Slider>
     </div>
   );
