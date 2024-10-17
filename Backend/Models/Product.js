@@ -36,8 +36,15 @@
         quantitySold: { 
             type: Number, 
             min: 0
+        },
+        sale:{
+            type:Boolean,
+        },
+        sales_price:{
+            type:Number,
+            min:0
         }
-        
+
     }, {
         timestamps: true 
         });

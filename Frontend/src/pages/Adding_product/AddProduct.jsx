@@ -7,7 +7,7 @@ import Grid from '@mui/material/Grid';
 import { useNavigate } from 'react-router-dom';
 import JoditEditor from 'jodit-react';
 import axios from "axios";
-
+import { Switch, FormControlLabel } from '@mui/material';
 const AddProduct = (props) => {
     const [productName, setName] = useState('');
     const [brand, setBrand] = useState('');
@@ -74,7 +74,7 @@ const AddProduct = (props) => {
         borderRadius: '10px',
         outline: 'none'
     };
-
+    const label = { inputProps: { 'aria-label': 'Size switch demo' } };
     return (
         <div>
             <Modal
@@ -154,6 +154,22 @@ const AddProduct = (props) => {
                                     onChange={(e) => setColor(e.target.value)}
                                 />
                             </Grid>
+                            <Grid item xs={6}>
+                            <FormControlLabel
+                             control={<Switch defaultChecked />}
+                             label="Is this is on sale"
+                            />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <TextField
+                                    fullWidth
+                                    label="Category"
+                                    variant="outlined"
+                                    value={category}
+                                    onChange={(e) => setCategory(e.target.value)}
+                                />
+                            </Grid>
+                            
                             <Grid item xs={12} style={{ textAlign: 'center', marginTop: '20px' }}>
                                 <Button variant="contained" color="primary" type="submit">
                                     Add Product
