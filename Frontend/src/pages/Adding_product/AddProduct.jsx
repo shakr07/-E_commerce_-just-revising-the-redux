@@ -18,6 +18,8 @@ const AddProduct = (props) => {
     const [color, setColor] = useState('');
     const [open, setOpen] = useState(false);
     const [content, setContent] = useState('');
+    const [disCOunt,setDiscount]=useState(false);
+    const [disCOuntprice,setDiscountprice]=useState(price);
     const editor = useRef(null);
     const Navigate = useNavigate();
 
@@ -41,7 +43,9 @@ const AddProduct = (props) => {
                 price: parseFloat(price),  // Ensure price is a number
                 category, 
                 image, 
-                color
+                color,
+                disCOunt,
+                disCOuntprice:parseFloat(disCOuntprice)
             });
     
             console.log('Product added successfully');
@@ -55,11 +59,14 @@ const AddProduct = (props) => {
             setCategory('');
             setImage('');
             setColor('');
+            setDiscountprice('');
     
             // Close the modal after form submission
             handleClose();
+            Navigate("/")
         } catch (error) {
             console.error('Error adding product:', error.response ? error.response.data : error.message);
+            Navigate("/")
         }
     };  
     const style = {
@@ -74,7 +81,19 @@ const AddProduct = (props) => {
         borderRadius: '10px',
         outline: 'none'
     };
-    const label = { inputProps: { 'aria-label': 'Size switch demo' } };
+   
+    function check(){
+        if(disCOunt==true)      
+        {
+            setDiscount(false);
+        }
+        else{
+            setDiscount(true);
+        }
+    
+
+              console.log(disCOunt);
+    }
     return (
         <div>
             <Modal
@@ -88,6 +107,8 @@ const AddProduct = (props) => {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
+             
+
                 <Box sx={style}>
                     <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Add New Product</h2>
                     <form onSubmit={handleSubmit}>
@@ -155,20 +176,24 @@ const AddProduct = (props) => {
                                 />
                             </Grid>
                             <Grid item xs={6}>
-                            <FormControlLabel
-                             control={<Switch defaultChecked />}
-                             label="Is this is on sale"
-                            />
+                            <FormControlLabel control={<Switch defaultunChecked />} label="Label" onChange={check} />
                             </Grid>
                             <Grid item xs={6}>
-                                <TextField
-                                    fullWidth
-                                    label="Category"
-                                    variant="outlined"
-                                    value={category}
-                                    onChange={(e) => setCategory(e.target.value)}
-                                />
-                            </Grid>
+                                {console.log(disCOunt)}
+                             {
+                             
+                             disCOunt ? (
+                            <TextField
+                           fullWidth
+                             label="Sale Price"
+                              variant="outlined"
+                              type="number"
+                               value={disCOuntprice}
+                               onChange={(e) => setDiscountprice(e.target.value)}
+                                     />
+                                ) : null
+                                }
+                                </Grid>
                             
                             <Grid item xs={12} style={{ textAlign: 'center', marginTop: '20px' }}>
                                 <Button variant="contained" color="primary" type="submit">

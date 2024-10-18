@@ -37,10 +37,10 @@
             type: Number, 
             min: 0
         },
-        sale:{
+        disCOunt:{
             type:Boolean,
         },
-        sales_price:{
+        disCOuntprice:{
             type:Number,
             min:0
         }

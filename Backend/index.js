@@ -28,7 +28,7 @@ connectDB();
 
 // Use ecommerce routes
 app.use('/api/ecommerce', ecommerceRoutes);
-app.use('/api/sal   es',ecommerceRoutes)
+app.use('/api/sales',ecommerceRoutes)
 const PORT =  8000;
 app.listen(PORT, () => {
     console.log(`App is listening on port ${PORT}`);

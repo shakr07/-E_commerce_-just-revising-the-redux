@@ -15,7 +15,8 @@ const createProduct = async (req, res) => {
 
 const saleProduct=async(req,res)=>{
 try {
-  const result= await Product.find({})
+  const result= await Product.find().sort({ timestamp: -1 }).limit(3);
+  console.log(result)
   res.status(200).send(result);
 } catch (error) {
   res.status(404).json({message:error.message});
