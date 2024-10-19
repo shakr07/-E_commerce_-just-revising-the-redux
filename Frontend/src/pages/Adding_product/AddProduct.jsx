@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import JoditEditor from 'jodit-react';
 import axios from "axios";
 import { Switch, FormControlLabel } from '@mui/material';
+import { Toaster,toast } from "react-hot-toast";
 const AddProduct = (props) => {
     const [productName, setName] = useState('');
     const [brand, setBrand] = useState('');
@@ -33,8 +34,20 @@ const AddProduct = (props) => {
         e.preventDefault();
     
         // Log the values to ensure they're set correctly
+        if (
+            productName === '' ||
+            brand === '' ||
+            content === '' ||
+            price === '' ||
+            category === '' ||
+            image === '' ||
+            color === ''
+        ) {
+            toast.error("Please fill all the fields or press the Cancel button");
+        }
+        return ;
         console.log({ productName, brand, content, price, category, image, color });
-    
+         
         try {
             await axios.post('http://localhost:8000/api/ecommerce/product_input', {
                 productName, 
@@ -47,7 +60,7 @@ const AddProduct = (props) => {
                 disCOunt,
                 disCOuntprice:parseFloat(disCOuntprice)
             });
-    
+            toast.error("Product added successfully.");   
             console.log('Product added successfully');
     
             // Reset the form
@@ -60,12 +73,13 @@ const AddProduct = (props) => {
             setImage('');
             setColor('');
             setDiscountprice('');
-    
+               
             // Close the modal after form submission
             handleClose();
             Navigate("/")
         } catch (error) {
             console.error('Error adding product:', error.response ? error.response.data : error.message);
+            
             Navigate("/")
         }
     };  
@@ -96,6 +110,10 @@ const AddProduct = (props) => {
     }
     return (
         <div>
+            <Toaster
+  position="top-left"
+  reverseOrder={false}
+/>
             <Modal
                 open={open}
                 onClose={(event, reason) => {
@@ -199,7 +217,11 @@ const AddProduct = (props) => {
                                 <Button variant="contained" color="primary" type="submit">
                                     Add Product
                                 </Button>
-                                <Button variant="contained" color="primary" style={{ marginLeft: '50px' }} onClick={() => Navigate("/")}>
+                                <Button variant="contained" color="primary" style={{ marginLeft: '50px' }} onClick={() => {
+                                    
+
+                                    Navigate("/")
+                                    }}>
                                     Cancel
                                 </Button>
                             </Grid>

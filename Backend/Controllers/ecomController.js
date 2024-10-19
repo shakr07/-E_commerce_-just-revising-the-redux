@@ -15,7 +15,7 @@ const createProduct = async (req, res) => {
 
 const saleProduct=async(req,res)=>{
 try {
-  const result= await Product.find().sort({ timestamp: -1 }).limit(3);
+  const result= await Product.find({disCOunt:true}).sort({ timestamp: -1 }).limit(3);
   console.log(result)
   res.status(200).send(result);
 } catch (error) {
@@ -24,5 +24,14 @@ try {
   
 }
 
+const newArrival=async(req,res)=>{
+try {
+  const result=await Product.find({disCOunt:false}).sort({timestamp:-1}).limit(4);
+  res.status(200).send(result);
+} catch (error) {
+  res.status(500).json({message:error.message});
+}
+}
 
-module.exports = {createProduct,saleProduct};  
+
+module.exports = {createProduct,saleProduct,newArrival};  

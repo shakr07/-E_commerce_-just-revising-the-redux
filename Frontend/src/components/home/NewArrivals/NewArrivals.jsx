@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Slider from "react-slick";
 import Heading from "../Products/Heading";
 import Product from "../Products/Product";
@@ -46,6 +46,16 @@ const NewArrivals = () => {
       },
     ],
   };
+
+  useEffect(()=>{
+   const fetchSalesData=async()=>{
+    try {
+      
+    } catch (error) {
+      
+    }
+   }
+  },)
   return (
     <div className="w-full pb-16">
       <Heading heading="New Arrivals" />
