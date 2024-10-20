@@ -29,7 +29,6 @@ const AddProduct = (props) => {
     }, [props.hello]); 
 
     const handleClose = () => setOpen(false);
-
     const handleSubmit = async (e) => {
         e.preventDefault();
     
@@ -44,10 +43,11 @@ const AddProduct = (props) => {
             color === ''
         ) {
             toast.error("Please fill all the fields or press the Cancel button");
+            return; // Keep this return to exit if validation fails
         }
-        return ;
+    
         console.log({ productName, brand, content, price, category, image, color });
-         
+    
         try {
             await axios.post('http://localhost:8000/api/ecommerce/product_input', {
                 productName, 
@@ -58,11 +58,11 @@ const AddProduct = (props) => {
                 image, 
                 color,
                 disCOunt,
-                disCOuntprice:parseFloat(disCOuntprice)
+                disCOuntprice: parseFloat(disCOuntprice) || 0 // Default to 0 if not set
             });
-            toast.error("Product added successfully.");   
+            toast.success("Product added successfully.");   
             console.log('Product added successfully');
-    
+         
             // Reset the form
             setName('');
             setBrand('');
@@ -73,16 +73,16 @@ const AddProduct = (props) => {
             setImage('');
             setColor('');
             setDiscountprice('');
-               
+    
             // Close the modal after form submission
             handleClose();
-            Navigate("/")
+            Navigate("/");
         } catch (error) {
             console.error('Error adding product:', error.response ? error.response.data : error.message);
-            
-            Navigate("/")
+            toast.error("Error adding product."); // Notify user of the error
+            Navigate("/");
         }
-    };  
+    };
     const style = {
         position: 'absolute',
         top: '50%',
@@ -219,7 +219,7 @@ const AddProduct = (props) => {
                                 </Button>
                                 <Button variant="contained" color="primary" style={{ marginLeft: '50px' }} onClick={() => {
                                     
-
+                                                  
                                     Navigate("/")
                                     }}>
                                     Cancel
